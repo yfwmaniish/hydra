@@ -213,4 +213,4 @@ The system is highly configurable via `app/config.py` and the `.env` file:
 
 ---
 
-**Developed by Disha Rawat** | *Trinetra Threat Intelligence*
+**Developed by TEAM-HYDRA** | *Trinetra Threat Intelligence*
