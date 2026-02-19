@@ -7,7 +7,7 @@ import httpx
 import logging
 import json
 from ..config import settings
-from ..schemas.threat import Threat
+
 
 logger = logging.getLogger(__name__)
 
