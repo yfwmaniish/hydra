@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     telegram_chat_id: Optional[str] = None
 
     # CORS
-    cors_origins: str = "http://localhost:5173,http://localhost:3000"
+    cors_origins: str = "http://localhost:5173,http://localhost:3000,https://trinetra-intel-v3.web.app"
 
     # Server
     host: str = "0.0.0.0"
