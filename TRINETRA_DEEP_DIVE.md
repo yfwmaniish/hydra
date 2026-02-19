@@ -36,7 +36,7 @@ The system has **3 layers**:
 ### Project Structure
 
 ```
-HYDRA/
+TRINETRA/
 ├── trinetra-backend/          # Python FastAPI backend
 │   ├── app/
 │   │   ├── main.py            # FastAPI app entry point
@@ -106,7 +106,7 @@ Key details:
 
 ## 4. The Crawler Engine — The Heart of the System
 
-File: [engine.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/crawler/engine.py)
+File: [engine.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/crawler/engine.py)
 
 The Crawler Engine is a **singleton background service** that orchestrates the entire intelligence pipeline in a loop.
 
@@ -154,7 +154,7 @@ Three scrapers run **simultaneously** using `asyncio.gather()`:
 ## 5. The Three Scrapers
 
 ### 5.1 Reddit Scraper
-File: [reddit_scraper.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/crawler/scrapers/reddit_scraper.py)
+File: [reddit_scraper.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/crawler/scrapers/reddit_scraper.py)
 
 | Aspect | Details |
 |--------|---------|
@@ -165,7 +165,7 @@ File: [reddit_scraper.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/ap
 | **Content Combined** | `title + \n\n + selftext` (title and body merged for analysis) |
 
 ### 5.2 Pastebin Scraper
-File: [pastebin_scraper.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/crawler/scrapers/pastebin_scraper.py)
+File: [pastebin_scraper.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/crawler/scrapers/pastebin_scraper.py)
 
 | Aspect | Details |
 |--------|---------|
@@ -176,7 +176,7 @@ File: [pastebin_scraper.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/
 | **Why Pastebin?** | Attackers frequently dump credentials and data here |
 
 ### 5.3 Generic Forum Scraper
-File: [generic_scraper.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/crawler/scrapers/generic_scraper.py)
+File: [generic_scraper.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/crawler/scrapers/generic_scraper.py)
 
 | Aspect | Details |
 |--------|---------|
@@ -206,7 +206,7 @@ class RawPost:
 
 ## 6. Credential Detector — Regex-Based Secret Scanner
 
-File: [credential_detector.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/crawler/credential_detector.py)
+File: [credential_detector.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/crawler/credential_detector.py)
 
 This is the **first analysis pass** on every scraped post. It scans the raw text using **24+ pre-compiled regex patterns** to find leaked secrets.
 
@@ -265,7 +265,7 @@ class CredentialMatch:
 
 ## 7. NLP Analyzer — Keyword & Contextual Threat Detection
 
-File: [analyzer.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/nlp/analyzer.py)
+File: [analyzer.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/nlp/analyzer.py)
 
 The NLP Analyzer is the **second analysis pass**. It examines the text for cybersecurity threat language, India-specific targeting, and extracts entities.
 
@@ -383,7 +383,7 @@ class ThreatIndicator:
 
 ## 8. Threat Scorer — The Unified 0-100 Score
 
-File: [threat_scorer.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/nlp/threat_scorer.py)
+File: [threat_scorer.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/nlp/threat_scorer.py)
 
 This module **combines** the outputs from both the NLP Analyzer and the Credential Detector into a single, unified threat assessment. This is the **final decision-making step** before storing a threat.
 
@@ -560,7 +560,7 @@ Example: `THR-20260219-A3B8D1E2F4C6`
 
 ## 10. Real-Time WebSocket Broadcast
 
-File: [websocket.py](file:///d:/Projects/Trinetra/HYDRA/trinetra-backend/app/routers/websocket.py)
+File: [websocket.py](file:///d:/Projects/Trinetra/TRINETRA/trinetra-backend/app/routers/websocket.py)
 
 When a new threat is stored, it is **immediately pushed** to all connected frontend clients:
 
@@ -587,7 +587,7 @@ sequenceDiagram
 
 ### 11.1 Service Layer
 
-File: [threatService.ts](file:///d:/Projects/Trinetra/HYDRA/trinetra-main-frontend/src/services/threatService.ts)
+File: [threatService.ts](file:///d:/Projects/Trinetra/TRINETRA/trinetra-main-frontend/src/services/threatService.ts)
 
 The frontend uses a **graceful fallback pattern**:
 1. Try calling the real backend API
@@ -606,7 +606,7 @@ async function withFallback<T>(apiFn: () => Promise<T>, fallback: T): Promise<T>
 
 ### 11.2 API Client
 
-File: [api.ts](file:///d:/Projects/Trinetra/HYDRA/trinetra-main-frontend/src/services/api.ts)
+File: [api.ts](file:///d:/Projects/Trinetra/TRINETRA/trinetra-main-frontend/src/services/api.ts)
 
 Centralized API client with:
 - Automatic Firebase auth token injection via `localStorage`

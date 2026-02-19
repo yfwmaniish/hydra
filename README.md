@@ -1,11 +1,11 @@
-# 🛡️ Trinetra (HYDRA) - Advanced Threat Intelligence Platform
+# 🛡️ TRINETRA - Advanced Threat Intelligence Platform
 
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Python](https://img.shields.io/badge/Backend-FastAPI-blue)
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-blueviolet)
 ![Database](https://img.shields.io/badge/Database-Firebase%20Firestore-orange)
 
-**Trinetra** is a sophisticated **Threat Intelligence Platform (TIP)** designed to proactively monitor, detect, and analyze cyber threats targeting Indian critical infrastructure. It acts as a central nervous system ("HYDRA") that scrapes data from various sources, applies rule-based and AI-driven analysis, and provides real-time actionable intelligence.
+**TRINETRA** is a sophisticated **Threat Intelligence Platform (TIP)** designed to proactively monitor, detect, and analyze cyber threats targeting Indian critical infrastructure. It acts as a central nervous system that scrapes data from various sources, applies rule-based and AI-driven analysis, and provides real-time actionable intelligence.
 
 ---
 
@@ -21,7 +21,7 @@ graph TD
         Forums["Custom Cyber Forums"]
     end
 
-    subgraph "Trinetra Backend (Hydra)"
+    subgraph "TRINETRA Backend"
         Crawler["🕷️ Crawler Engine"]
         subgraph "Analysis Pipeline"
             NLP["🧠 NLP Analyzer"]
