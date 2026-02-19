@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.firebase_client import initialize_firebase
+from app.config import settings
 from app.crawler.engine import get_engine
 from app.routers import auth, threats, entities, sectors, sources, keywords, stats, websocket
 
