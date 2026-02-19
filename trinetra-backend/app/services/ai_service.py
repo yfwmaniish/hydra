@@ -8,7 +8,6 @@ import logging
 import json
 from ..config import settings
 
-
 logger = logging.getLogger(__name__)
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"

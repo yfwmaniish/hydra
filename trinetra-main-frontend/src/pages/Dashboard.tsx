@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
@@ -19,29 +20,21 @@ const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const [filter, setFilter] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
-    const [threats, setThreats] = useState<Threat[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [stats, setStats] = useState({ active_threats: 0, critical_incidents: 0, monitored_sources: 0, system_status: 'Nominal' });
-
     const [selectedThreat, setSelectedThreat] = useState<Threat | null>(null);
 
-    React.useEffect(() => {
-        const loadData = async () => {
-            try {
-                const [threatData, statsData] = await Promise.allSettled([
-                    threatService.getThreats(),
-                    api.stats.dashboard(),
-                ]);
-                if (threatData.status === 'fulfilled') setThreats(threatData.value);
-                if (statsData.status === 'fulfilled') setStats(statsData.value);
-            } catch (error) {
-                console.error("Failed to fetch dashboard data", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadData();
-    }, []);
+    // React Query for Threats
+    const { data: threats = [], isLoading: loadingThreats } = useQuery({
+        queryKey: ['threats'],
+        queryFn: () => threatService.getThreats(),
+    });
+
+    // React Query for Stats
+    const { data: stats = { active_threats: 0, critical_incidents: 0, monitored_sources: 0, system_status: 'Nominal' }, isLoading: loadingStats } = useQuery({
+        queryKey: ['stats'],
+        queryFn: () => api.stats.dashboard(),
+    });
+
+    const loading = loadingThreats || loadingStats;
 
     const filteredThreats = threats.filter(threat => {
         const matchesFilter = filter === 'All' || threat.severity === filter;
