@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Light Mode Variables */
+        --bg-main: #e0e5ec;
+        --text-main: #4d4d4d;
+        --text-muted: #a0a0a0;
+
+        /* Neumorphic Shadows - Light */
+        --shadow-light: -9px -9px 16px rgba(255, 255, 255, 0.6);
+        --shadow-dark: 9px 9px 16px rgba(163, 177, 198, 0.6);
+        --shadow-inset-light: inset -6px -6px 10px rgba(255, 255, 255, 0.7);
+        --shadow-inset-dark: inset 6px 6px 10px rgba(163, 177, 198, 0.6);
+    }
+
+    .dark {
+        /* Dark Mode Variables */
+        --bg-main: #2d3748;
+        /* Slate 800 */
+        --text-main: #e2e8f0;
+        /* Slate 200 */
+        --text-muted: #94a3b8;
+        /* Slate 400 */
+
+        /* Neumorphic Shadows - Dark (Inverted/Softer) */
+        --shadow-light: -5px -5px 10px rgba(255, 255, 255, 0.05);
+        --shadow-dark: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        --shadow-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+        --shadow-inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .matrix {
+        /* Matrix Mode Variables */
+        --bg-main: #0d0208;
+        /* Black/Dark Green Tint */
+        --text-main: #00ff41;
+        /* Matrix Green */
+        --text-muted: #008f11;
+        /* Darker Green */
+
+        /* Retro Shadows - Harder edges/Green glow */
+        --shadow-light: -2px -2px 5px rgba(0, 255, 65, 0.1);
+        --shadow-dark: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        --shadow-inset-light: inset -2px -2px 5px rgba(0, 255, 65, 0.05);
+        --shadow-inset-dark: inset 2px 2px 5px rgba(0, 0, 0, 0.8);
+
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4a5568;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #718096;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite linear;
+}

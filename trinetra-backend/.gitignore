@@ -1,0 +1,14 @@
+# Trinetra Backend
+
+.env
+*.pyc
+__pycache__/
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+firebase-service-account.json
+serviceAccountKey.json
+.mypy_cache/
+.pytest_cache/
