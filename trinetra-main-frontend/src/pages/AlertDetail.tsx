@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
+
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import AnalogGauge from '../components/ui/AnalogGauge';
@@ -46,7 +46,7 @@ const AlertDetail: React.FC = () => {
     if (!threat) return <div className="flex items-center justify-center h-screen bg-background text-muted">Loading threat details...</div>;
 
     return (
-        <MainLayout>
+        <>
             <div className="flex flex-col h-full gap-8 max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between">
@@ -169,7 +169,7 @@ const AlertDetail: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     );
 };
 

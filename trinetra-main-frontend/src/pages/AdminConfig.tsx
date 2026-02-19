@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import MainLayout from '../layouts/MainLayout';
+
 import Card from '../components/ui/Card';
 import Toggle from '../components/ui/Toggle';
 import Button from '../components/ui/Button';
@@ -137,16 +137,16 @@ const AdminConfig: React.FC = () => {
     // ─── Loading state ─────────────────────────────────────────────
     if (loading) {
         return (
-            <MainLayout>
+            <>
                 <div className="flex items-center justify-center h-full">
                     <Loader2 className="animate-spin text-muted" size={40} />
                 </div>
-            </MainLayout>
+            </>
         );
     }
 
     return (
-        <MainLayout>
+        <>
             <div className="max-w-5xl mx-auto h-full flex flex-col gap-8">
                 <header className="mb-4">
                     <h1 className="text-3xl font-bold text-text mb-2">System Configuration</h1>
@@ -299,7 +299,7 @@ const AdminConfig: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
+
 import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
 import SectorHealth from '../components/ui/SectorHealth';
@@ -53,7 +53,7 @@ const Dashboard: React.FC = () => {
     const categories = ['All', 'Critical', 'High', 'Medium', 'Low'];
 
     return (
-        <MainLayout>
+        <>
             <div className="max-w-[1600px] mx-auto h-full flex flex-col gap-8">
                 {/* Header Section */}
                 <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -229,7 +229,7 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     );
 };
 

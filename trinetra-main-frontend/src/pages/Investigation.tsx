@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainLayout from '../layouts/MainLayout';
+
 import EntityGraph from '../components/ui/EntityGraph';
 import Card from '../components/ui/Card';
 import { Search, Filter, Share2, Download } from 'lucide-react';
@@ -36,7 +36,7 @@ const Investigation: React.FC = () => {
     };
 
     return (
-        <MainLayout>
+        <>
             <div className="max-w-7xl mx-auto h-full flex flex-col gap-6">
                 <header className="flex justify-between items-end">
                     <div>
@@ -114,7 +114,7 @@ const Investigation: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     );
 };
 

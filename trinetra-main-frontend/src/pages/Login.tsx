@@ -1,111 +1,94 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Eye, EyeOff } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Shield, Lock, Eye, EyeOff } from 'lucide-react';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Card from '../components/ui/Card';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsLoading(true);
-        // Simulate API call
+        setLoading(true);
+        // Simulate login delay
         setTimeout(() => {
-            setIsLoading(false);
+            setLoading(false);
+            // In a real app, you'd set auth state here
             navigate('/');
-        }, 1500);
+        }, 1000);
     };
 
     return (
-        <div className="min-h-screen bg-[#0d0208] text-[#00ff41] flex items-center justify-center p-4 font-mono relative overflow-hidden">
-            {/* Background Grid Animation */}
-            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none"
-                style={{
-                    backgroundImage: 'linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px)',
-                    backgroundSize: '30px 30px'
-                }}>
+        <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-crimson/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-crimson/10 rounded-full blur-[100px]" />
             </div>
 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="w-full max-w-md bg-black/80 backdrop-blur-sm border border-[#00ff41]/30 p-8 rounded-xl shadow-[0_0_20px_rgba(0,255,65,0.2)] z-10 relative"
-            >
-                <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 rounded-full border-2 border-[#00ff41] flex items-center justify-center shadow-[0_0_15px_rgba(0,255,65,0.4)]">
+            <Card className="w-full max-w-md p-8 relative z-10 backdrop-blur-md bg-background/80 border border-white/5 shadow-2xl">
+                <div className="flex flex-col items-center mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-surfaceShadow shadow-neumorphic flex items-center justify-center text-crimson mb-4">
                         <Shield size={32} />
                     </div>
+                    <h1 className="text-2xl font-bold tracking-widest text-text">TRINETRA</h1>
+                    <p className="text-muted text-sm mt-2">Threat Intelligence Platform</p>
                 </div>
-
-                <h1 className="text-2xl font-bold text-center mb-2 tracking-widest text-[#00ff41] drop-shadow-[0_0_5px_rgba(0,255,65,0.8)]">
-                    SENTINEL ACCESS
-                </h1>
-                <p className="text-center text-green-400/60 text-xs mb-8">RESTRICTED AREA. AUTHORIZED PERSONNEL ONLY.</p>
 
                 <form onSubmit={handleLogin} className="space-y-6">
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase font-bold tracking-wider">Agent ID / Email</label>
-                        <div className="relative">
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-black/50 border border-[#00ff41]/50 focus:border-[#00ff41] rounded px-4 py-3 outline-none transition-all placeholder-green-900 text-green-100"
-                                placeholder="agent@sentinel.intel"
-                                required
-                            />
-                        </div>
+                    <Input
+                        label="Email Address"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="agent@trinetra.intel"
+                        required
+                        icon={<Lock size={18} />}
+                    />
+
+                    <div className="relative">
+                        <Input
+                            label="Password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="••••••••"
+                            required
+                            icon={<Lock size={18} />}
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-[38px] text-muted hover:text-text transition-colors"
+                        >
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
                     </div>
 
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase font-bold tracking-wider">Passcode</label>
-                        <div className="relative">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="w-full bg-black/50 border border-[#00ff41]/50 focus:border-[#00ff41] rounded px-4 py-3 outline-none transition-all placeholder-green-900 text-green-100"
-                                required
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#00ff41]/70 hover:text-[#00ff41]"
-                            >
-                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                        </div>
-                    </div>
-
-                    <button
+                    <Button
+                        variant="primary"
+                        className="w-full justify-center py-3 text-lg font-semibold shadow-lg shadow-crimson/20 hover:shadow-crimson/40"
+                        isLoading={loading}
                         type="submit"
-                        className="w-full bg-[#00ff41]/20 hover:bg-[#00ff41]/30 border border-[#00ff41] text-[#00ff41] font-bold py-3 rounded transition-all uppercase tracking-widest relative overflow-hidden group"
                     >
-                        {isLoading ? (
-                            <span className="flex items-center justify-center gap-2">
-                                <span className="w-2 h-2 bg-[#00ff41] rounded-full animate-bounce" style={{ animationDelay: '0s' }}></span>
-                                <span className="w-2 h-2 bg-[#00ff41] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                                <span className="w-2 h-2 bg-[#00ff41] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                            </span>
-                        ) : (
-                            <>
-                                <span className="relative z-10">Authenticate</span>
-                                <div className="absolute inset-0 bg-[#00ff41] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 opacity-10"></div>
-                            </>
-                        )}
-                    </button>
+                        {loading ? 'Authenticating...' : 'Access Terminal'}
+                    </Button>
                 </form>
 
-                <div className="mt-8 pt-6 border-t border-[#00ff41]/20 flex justify-between text-[10px] text-green-500/50 font-mono">
-                    <span>SYS.VER.2.4.0</span>
-                    <span className="animate-pulse">SECURE CONNECTION ESTABLISHED</span>
+                <div className="mt-6 text-center">
+                    <p className="text-xs text-muted/60">
+                        Restricted Access. Authorized Personnel Only.
+                        <br />
+                        System activity is monitored and logged.
+                    </p>
                 </div>
-            </motion.div>
+            </Card>
         </div>
     );
 };
